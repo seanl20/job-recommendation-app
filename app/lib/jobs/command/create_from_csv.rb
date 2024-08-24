@@ -8,6 +8,7 @@ module Jobs
         CSV.foreach(csv_data, :headers => true) do |data|
           job_repo.create(data.to_hash)
         end
+        Success()
       end
 
       private
