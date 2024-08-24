@@ -1,4 +1,4 @@
-module JobSeekers
+module Jobs
   module Changesets
     class Create
       def self.map(tuple)
