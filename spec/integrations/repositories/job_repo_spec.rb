@@ -8,7 +8,9 @@ RSpec.describe Repositories::JobRepo do
 
     let!(:attrs) do
       {
-        id: 1, title: "John", required_skills: "Test, Rspec, Running"
+        "id" => 1, 
+        "title" => "John", 
+        "required_skills" => "Test, Rspec, Running"
       }
     end
 

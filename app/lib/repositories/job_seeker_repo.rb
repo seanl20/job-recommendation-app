@@ -5,7 +5,7 @@ module Repositories
     def create(attrs)
       ActiveRecord::Base.transaction do
         job_seeker = JobSeekers::JobSeeker.create!(JobSeekers::Changesets::Create.map(attrs))
-        create_job_seeker_skills(job_seeker:, skills: attrs[:skills])
+        create_job_seeker_skills(job_seeker:, skills: attrs["skills"])
       end
     end
 
