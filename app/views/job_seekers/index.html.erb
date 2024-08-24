@@ -1,0 +1,20 @@
+<div class="row">
+  <h1>Job Seekers List</h1>
+</div>
+
+<div class="row">
+  <table class="table table-striped table-bordered">
+    <tr>
+      <th>Id</th>
+      <th>Name</th>
+      <th>Skills</th>
+    </tr>
+    <% @job_seekers.each do |job_seeker| %>
+      <tr>
+        <td><%= job_seeker[:id] %></td>
+        <td><%= job_seeker[:name] %></td>
+        <td><%= job_seeker[:skills] %></td>
+      </tr>
+    <% end %>
+  </table>
+</div>
