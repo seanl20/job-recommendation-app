@@ -19,11 +19,11 @@ RSpec.describe JobSeekers::Command::CreateFromCsv do
     let!(:csv_data) { ActionDispatch::Http::UploadedFile.new(tempfile: job_seeker_upload, filename: "test.csv") }
 
     it "create job" do
-      expect { execute }.to change {JobSeekers::JobSeeker.count}.by(2)
+      expect { execute }.to change { JobSeekers::JobSeeker.count }.by(2)
     end
 
     it "create job required skills" do
-      expect { execute }.to change {JobSeekers::JobSeekerSkill.count}.by(6)
+      expect { execute }.to change { JobSeekers::JobSeekerSkill.count }.by(6)
     end
   end
 end

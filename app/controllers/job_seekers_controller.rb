@@ -4,12 +4,10 @@ class JobSeekersController < ApplicationController
   end
 
   def create
-    begin
-      JobSeekers::Command::CreateFromCsv.new.execute(params[:job_seeker])
-      
-      redirect_to(root_path, notice: "Job Seekers Created")
-    rescue ActiveRecord::RecordNotUnique
-      redirect_to(root_path, alert: "Job Seekers Id Existed")
-    end
+    JobSeekers::Command::CreateFromCsv.new.execute(params[:job_seeker])
+
+    redirect_to(root_path, notice: "Job Seekers Created")
+  rescue ActiveRecord::RecordNotUnique
+    redirect_to(root_path, alert: "Job Seekers Id Existed")
   end
 end

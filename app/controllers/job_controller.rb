@@ -4,12 +4,10 @@ class JobController < ApplicationController
   end
 
   def create
-    begin
-      Jobs::Command::CreateFromCsv.new.execute(params[:job])
-      
-      redirect_to(root_path, notice: "Jobs Created")
-    rescue ActiveRecord::RecordNotUnique
-      redirect_to(root_path, alert: "Jobs Id Existed")
-    end
+    Jobs::Command::CreateFromCsv.new.execute(params[:job])
+
+    redirect_to(root_path, notice: "Jobs Created")
+  rescue ActiveRecord::RecordNotUnique
+    redirect_to(root_path, alert: "Jobs Id Existed")
   end
 end

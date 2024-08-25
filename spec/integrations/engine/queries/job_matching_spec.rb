@@ -13,15 +13,15 @@ RSpec.describe Engine::Queries::JobMatching do
       let!(:job) { FactoryBot.create(:job) }
       let!(:job_required_skill_1) { FactoryBot.create(:job_required_skill, job:, required_skill: "Test") }
       let!(:job_required_skill_2) { FactoryBot.create(:job_required_skill, job:, required_skill: "Rspec") }
-  
+
       it "return records" do
-        expect(call).to match_unordered_elements( {
+        expect(call).to match_unordered_elements({
           jobseeker_id: job_seeker.id,
-          jobseeker_name: job_seeker.name, 
-          job_id: job.id, 
-          job_title: job.title, 
-          matching_skill_count: 2, 
-          matching_skill_percent: 100 
+          jobseeker_name: job_seeker.name,
+          job_id: job.id,
+          job_title: job.title,
+          matching_skill_count: 2,
+          matching_skill_percent: 100
         })
       end
     end

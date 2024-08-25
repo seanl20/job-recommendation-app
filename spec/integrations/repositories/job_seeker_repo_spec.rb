@@ -9,27 +9,27 @@ RSpec.describe Repositories::JobSeekerRepo do
     let!(:attrs) do
       [
         {
-          "id" => 1, 
-          "name" => "John", 
+          "id" => 1,
+          "name" => "John",
           "skills" => "Test, Rspec, Running"
         }, {
-          "id" => 2, 
-          "name" => "John", 
+          "id" => 2,
+          "name" => "John",
           "skills" => "Test, Rspec, Running"
         }, {
-          "id" => 3, 
-          "name" => "John", 
+          "id" => 3,
+          "name" => "John",
           "skills" => "Test, Rspec, Running"
         }
       ]
     end
 
     it "batch_create job seeker" do
-      expect { batch_create }.to change {JobSeekers::JobSeeker.count}.by(3)
+      expect { batch_create }.to change { JobSeekers::JobSeeker.count }.by(3)
     end
 
     it "batch_create job seeker skills" do
-      expect { batch_create }.to change {JobSeekers::JobSeekerSkill.count}.by(9)
+      expect { batch_create }.to change { JobSeekers::JobSeekerSkill.count }.by(9)
     end
   end
 
@@ -42,7 +42,7 @@ RSpec.describe Repositories::JobSeekerRepo do
       let!(:job_seeker) { FactoryBot.create(:job_seeker) }
       let!(:job_seeker_skill_1) { FactoryBot.create(:job_seeker_skill, job_seeker:, skill: "Test") }
       let!(:job_seeker_skill_2) { FactoryBot.create(:job_seeker_skill, job_seeker:, skill: "Rspec") }
-  
+
       it "return records" do
         expect(job_seekers).to match_unordered_elements(job_seeker)
         expect(job_seekers.first.job_seeker_skills).to match_unordered_elements(job_seeker_skill_1, job_seeker_skill_2)

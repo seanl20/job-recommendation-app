@@ -3,7 +3,7 @@
 require "rails_helper"
 
 RSpec.describe "POST /job_seekers", type: :request do
-  subject(:send_request) { post job_seekers_path, params: { job_seeker: job_seeker_params } }
+  subject(:send_request) { post job_seekers_path, params: {job_seeker: job_seeker_params} }
 
   context "when records doesn't exists" do
     let(:job_seeker_upload) do
@@ -19,11 +19,11 @@ RSpec.describe "POST /job_seekers", type: :request do
     let(:job_seeker_params) { Rack::Test::UploadedFile.new(job_seeker_upload) }
 
     it "creates job seeker" do
-      expect { send_request }.to change {JobSeekers::JobSeeker.count}.by(2)
+      expect { send_request }.to change { JobSeekers::JobSeeker.count }.by(2)
     end
 
     it "creates job seeker skills" do
-      expect { send_request }.to change {JobSeekers::JobSeekerSkill.count}.by(6)
+      expect { send_request }.to change { JobSeekers::JobSeekerSkill.count }.by(6)
     end
 
     it "redirect to root" do
@@ -49,11 +49,11 @@ RSpec.describe "POST /job_seekers", type: :request do
     let(:job_seeker_params) { Rack::Test::UploadedFile.new(job_seeker_upload) }
 
     it "does not creates jobs" do
-      expect { send_request }.to change {JobSeekers::JobSeeker.count}.by(0)
+      expect { send_request }.to change { JobSeekers::JobSeeker.count }.by(0)
     end
 
     it "doex not creates job required skills" do
-      expect { send_request }.to change {JobSeekers::JobSeekerSkill.count}.by(0)
+      expect { send_request }.to change { JobSeekers::JobSeekerSkill.count }.by(0)
     end
 
     it "redirect to root" do

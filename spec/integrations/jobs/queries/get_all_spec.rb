@@ -10,7 +10,7 @@ RSpec.describe Jobs::Queries::GetAll do
       let!(:job) { FactoryBot.create(:job) }
       let!(:job_required_skill_1) { FactoryBot.create(:job_required_skill, job:, required_skill: "Test") }
       let!(:job_required_skill_2) { FactoryBot.create(:job_required_skill, job:, required_skill: "Rspec") }
-  
+
       it "return records" do
         expect(call).to match_unordered_elements({
           id: job.id,
