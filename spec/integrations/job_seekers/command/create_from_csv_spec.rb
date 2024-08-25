@@ -6,7 +6,7 @@ RSpec.describe JobSeekers::Command::CreateFromCsv do
       described_class.new.execute(csv_data)
     end
 
-    let(:job_upload) do
+    let(:job_seeker_upload) do
       file = Tempfile.new("test.csv")
       file.write("id,name,skills\n")
       file.write("1,Alice Seeker,\"Ruby, SQL, Problem Solving\"\n")
@@ -16,7 +16,7 @@ RSpec.describe JobSeekers::Command::CreateFromCsv do
       file
     end
 
-    let!(:csv_data) { ActionDispatch::Http::UploadedFile.new(tempfile: job_upload, filename: "test.csv") }
+    let!(:csv_data) { ActionDispatch::Http::UploadedFile.new(tempfile: job_seeker_upload, filename: "test.csv") }
 
     it "create job" do
       expect { execute }.to change {JobSeekers::JobSeeker.count}.by(2)

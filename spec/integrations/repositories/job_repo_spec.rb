@@ -1,25 +1,35 @@
 require "rails_helper"
 
 RSpec.describe Repositories::JobRepo do
-  describe "#create" do
-    subject(:create) do
-      described_class.new.create(attrs)
+  describe "#batch_create" do
+    subject(:batch_create) do
+      described_class.new.batch_create(attrs)
     end
 
     let!(:attrs) do
-      {
-        "id" => 1, 
-        "title" => "John", 
-        "required_skills" => "Test, Rspec, Running"
-      }
+      [
+        {
+          "id" => 1, 
+          "title" => "John", 
+          "required_skills" => "Test, Rspec, Running"
+        },{
+          "id" => 2, 
+          "title" => "John", 
+          "required_skills" => "Test, Rspec, Running"
+        },{
+          "id" => 3, 
+          "title" => "John", 
+          "required_skills" => "Test, Rspec, Running"
+        }
+      ]
     end
 
     it "create job" do
-      expect { create }.to change {Jobs::Job.count}.by(1)
+      expect { batch_create }.to change {Jobs::Job.count}.by(3)
     end
 
     it "create job required skills" do
-      expect { create }.to change {Jobs::JobRequiredSkill.count}.by(3)
+      expect { batch_create }.to change {Jobs::JobRequiredSkill.count}.by(9)
     end
   end
 
