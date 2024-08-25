@@ -2,10 +2,13 @@
 
 module Repositories
   class JobSeekerRepo
-    def create(attrs)
+    def batch_create(batch_attrs)
       ActiveRecord::Base.transaction do
-        job_seeker = JobSeekers::JobSeeker.create!(JobSeekers::Changesets::Create.map(attrs))
-        create_job_seeker_skills(job_seeker:, skills: attrs["skills"])
+        batch_attrs.map do |attrs|
+          job_seeker = JobSeekers::JobSeeker.create!(JobSeekers::Changesets::Create.map(attrs))
+
+          create_job_seeker_skills(job_seeker:, skills: attrs["skills"])
+        end
       end
     end
 

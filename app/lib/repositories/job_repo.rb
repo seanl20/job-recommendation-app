@@ -2,11 +2,13 @@
 
 module Repositories
   class JobRepo
-    def create(attrs)
+    def batch_create(batch_attrs)
       ActiveRecord::Base.transaction do
-        job = Jobs::Job.create!(Jobs::Changesets::Create.map(attrs))
+        batch_attrs.map do |attrs|
+          job = Jobs::Job.create!(Jobs::Changesets::Create.map(attrs))
 
-        create_job_required_skills(job:, required_skills: attrs["required_skills"])
+          create_job_required_skills(job:, required_skills: attrs["required_skills"])
+        end
       end
     end
 
