@@ -18,7 +18,7 @@ module Engine
 
             matching_skill_count = get_matching_skill_count(job_seeker_skills_array, required_skills_array)
             longest_array_count = get_longest_array_count(job_seeker_skills_array, required_skills_array)
-            matching_skill_percent = get_matching_skill_percent_from_counts(matching_skill_count, longest_array_count).to_i
+            matching_skill_percent = get_matching_skill_percent_from_counts(matching_skill_count, longest_array_count)
 
             {
               jobseeker_id: job_seeker.id,
@@ -32,20 +32,20 @@ module Engine
         end
       end
 
-      def sort_array(array)
-        array.sort_by{ |array| [array[:jobseeker_id], -array[:matching_skill_percent], array[:job_id]]}
+      def sort_array(job_match_array)
+        job_match_array.sort_by{ |array| [array[:jobseeker_id], -array[:matching_skill_percent], array[:job_id]]}
       end
 
-      def get_matching_skill_count(array_1, array_2)
-        array_1.zip(array_2).count do |a, b| a==b end
+      def get_matching_skill_count(job_seeker_skills_array, required_skills_array)
+        job_seeker_skills_array.zip(required_skills_array).count do |a, b| a==b end
       end
 
-      def get_longest_array_count(array_1, array_2)
-        [array_1, array_2].max.count
+      def get_longest_array_count(job_seeker_skills_array, required_skills_array)
+        [job_seeker_skills_array, required_skills_array].max.count
       end
 
-      def get_matching_skill_percent_from_counts(count_1, count_2)
-        ( count_1.to_f / count_2.to_f ) * 100
+      def get_matching_skill_percent_from_counts(matching_skill_count, longest_array_count)
+        (( matching_skill_count.to_f / longest_array_count.to_f ) * 100).to_i
       end
 
       private
